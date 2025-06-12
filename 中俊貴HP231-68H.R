@@ -1,4 +1,4 @@
-# Naka45
+-# Naka45
 1+1
 
 `1+2`もいいね！
@@ -34,7 +34,7 @@ hoge<-1:10
 hoge
 hoge2<-hoge*2
 hoge2
-str(hoge2)
+str(hoge2)  
 hoge2[3]
 hoge2[2:5]
 hoge2[c(2,4,6,8,10)]
@@ -176,10 +176,54 @@ dat.tb <- dat.tb %>%
 
 # 76. LeagueをFactor型に変換
 dat.tb$League <- dat.tb$League %>% as.factor()
-
+0
 # 77. リーグごとのチーム数確認
 table(dat.tb$team, dat.tb$League)
 
+#78
+dat.tb<-dat.tb %>% 
+  mutate(year_num=Year %>% str_remove("年度") %>% as.numeric())
+
+#79
+dat.tb %>% select(Year,year_num) %>% head() %>% 
+#80
+
+dat.tb %>% filter(position2 == "野手") %>% head()
+ 
+
+
+dat.tb %>% filter(year_num == 2020 & League == "Central") %>% head()
+
+# 85. 2020年セ・リーグの選手数
+dat.tb %>% filter(year_num == 2020 & League == "Central") %>% nrow()
+
+# 86. 選手名、チーム、身長、体重を表示
+dat.tb %>% select(Name, team, height, weight) %>% head()
+
+# 87. 2020年の選手名、チーム、年俸を表示
+dat.tb %>% select(Name, team, salary, year_num) %>% filter(year_num == 2020) %>% head()
+#88
+dat.tb %>% arrange(desc(salary)) %>% head(1)
+
+dat.tb %>% filter(year_num == 2020 & League == "Central") %>%
+  arrange(desc(salary)) %>% head(1)
+#90
+
+dat.tb %>% filter(team=="Giants") %>% 
+  summarise(avg_height=mean(height),avg_weight=mean(weight))
+
+
+dat.tb %>% group_by(team) %>%
+  summarise(mean_salary = mean(salary)) %>% arrange(desc(mean_salary))
+
+
+##91 グループ集計と要約統計量
+dat.tb %>% group_by(team) %>% 
+  summarise(mean_salary=mean(salary)) %>% arrange(desc(mean_salary))
+
+
+dat.tb %>% group_by(year_num , team) %>%
+ summarise(mean_salary=mean(salary)) %>% head(10)
 
 
 
@@ -188,22 +232,3 @@ table(dat.tb$team, dat.tb$League)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
