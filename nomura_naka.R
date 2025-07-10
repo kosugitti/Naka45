@@ -1,7 +1,7 @@
 install.packages("pacman")
 library(tidyverse)
 pacman::p_load(summarytools,tidverse)
-source("")
+
 dfSummary(main) %>% stview()
 vimain %>% names()
 LABEL<-vimain$ラベル
